@@ -1,0 +1,24 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Local Server",
+      "Group": "Shared Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Shared": true,
+      "SharedUsername": "postgres",
+      "SSLMode": "prefer"
+    },
+    "2": {
+      "Name": "Shared Postgres",
+      "Group": "Shared Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "MaintenanceDB": "postgres",
+      "Shared": true,
+      "SharedUsername": "postgres",
+      "SSLMode": "prefer"
+    }
+  }
+}

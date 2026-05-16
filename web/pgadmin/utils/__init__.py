@@ -601,8 +601,10 @@ def validate_json_data(data, is_admin):
     for server in data["Servers"]:
         obj = data["Servers"][server]
 
+        is_shared = obj.get("Shared", None)
+
         # Check if server is shared.Won't import if user is non-admin
-        if obj.get('Shared', None) and not is_admin:
+        if is_shared and not is_admin:
             print("Won't import the server '%s' as it is shared " %
                   obj["Name"])
             skip_servers.append(server)
@@ -625,9 +627,10 @@ def validate_json_data(data, is_admin):
                 return errmsg
 
         is_service_attrib_available = obj.get("Service", None) is not None
+        user_constraint_attrib = "SharedUsername" if is_shared else "Username"
 
         if not is_service_attrib_available:
-            for attrib in ("Port", "Username"):
+            for attrib in ("Port", user_constraint_attrib):
                 errmsg = check_attrib(attrib)
                 if errmsg:
                     return errmsg
